@@ -59,10 +59,9 @@ irAmpswitch.prototype.onRestart = function() {
 
 // Configuration Methods -----------------------------------------------------------------------------
 
-irAmpswitch.prototype.saveOptions = function (data) {
+irAmpswitch.prototype.saveIROptions = function (data) {
 	var self = this;
-    self.logger.info('ir_ampswitch saveOptions');
-    
+
 };
 
 

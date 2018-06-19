@@ -10,7 +10,7 @@
       "element": "section",
       "label": "TRANSLATE.PLUGIN_NAME",
       "icon": "fa-magic",
-      "onSave": {"type":"controller", "endpoint":"system_controller/ir_ampswitch", "method":"saveOptions"},
+      "onSave": {"type":"controller", "endpoint":"system_controller/ir_ampswitch", "method":"saveIROptions"},
       "saveButton": 
       {
         "label": "TRANSLATE.SAVE",
