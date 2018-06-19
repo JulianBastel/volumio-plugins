@@ -1,6 +1,6 @@
 {
   "PLUGIN_NAME":"IR Amplifier Switch",
-  "SAVE":"Save"
+  "SAVE":"Save",
   "PROFILE_SELECTOR": "Select profile",
   "PROFILE_SELECTOR_DOC": "Select the appropriate configuration for your remote from the available profiles"
 }
