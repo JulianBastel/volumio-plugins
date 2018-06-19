@@ -59,6 +59,10 @@ irTest.prototype.onRestart = function() {
 
 // Configuration Methods -----------------------------------------------------------------------------
 
+irTest.prototype.saveIROptions = function (data) {
+	var self = this;
+}
+
 irTest.prototype.getUIConfig = function() {
     var defer = libQ.defer();
     var self = this;
