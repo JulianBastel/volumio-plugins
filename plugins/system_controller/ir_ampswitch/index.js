@@ -58,13 +58,9 @@ irAmpswitch.prototype.onRestart = function() {
 
 
 // Configuration Methods -----------------------------------------------------------------------------
-
 irAmpswitch.prototype.saveIROptions = function (data) {
 	var self = this;
-
-};
-
-
+}
 
 
 irAmpswitch.prototype.getUIConfig = function() {
