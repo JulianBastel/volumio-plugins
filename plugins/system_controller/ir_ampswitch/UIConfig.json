@@ -1,7 +1,43 @@
 {
-  "page": {
-    "label": "TRANSLATE.PLUGIN_CONFIGURATION"
+  "page": 
+  {
+    "label": "TRANSLATE.PLUGIN_NAME"
   },
-  "sections": [
+  "sections": 
+  [
+    {
+      "id": "ir_conf",
+      "element": "section",
+      "label": "TRANSLATE.PLUGIN_NAME",
+      "icon": "fa-magic",
+      "onSave": {"type":"controller", "endpoint":"system_controller/ir_ampswitch", "method":"saveOptions"},
+      "saveButton": 
+      {
+        "label": "TRANSLATE.SAVE",
+        "data": 
+        [
+          "ir_profile"
+        ]
+      },
+      "value":  
+      {
+      },
+      "content": 
+      [
+        {
+          "id": "ir_profile",
+          "element": "select",
+          "doc": "TRANSLATE.PROFILE_SELECTOR_DOC",
+          "label": "TRANSLATE.PROFILE_SELECTOR",
+          "value":  
+          {
+          },
+          "options": 
+          [
+          ]
+
+        }
+      ]
+    }
   ]
 }
