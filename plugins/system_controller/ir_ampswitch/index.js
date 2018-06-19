@@ -19,7 +19,6 @@ function irAmpswitch(context) {
 }
 
 
-
 irAmpswitch.prototype.onVolumioStart = function()
 {
 	var self = this;
@@ -29,6 +28,7 @@ irAmpswitch.prototype.onVolumioStart = function()
 
     return libQ.resolve();
 }
+
 
 irAmpswitch.prototype.onStart = function() {
     var self = this;
@@ -58,6 +58,15 @@ irAmpswitch.prototype.onRestart = function() {
 
 
 // Configuration Methods -----------------------------------------------------------------------------
+
+irAmpswitch.prototype.saveOptions = function (data) {
+	var self = this;
+    self.logger.info('ir_ampswitch saveOptions');
+    
+};
+
+
+
 
 irAmpswitch.prototype.getUIConfig = function() {
     var defer = libQ.defer();
