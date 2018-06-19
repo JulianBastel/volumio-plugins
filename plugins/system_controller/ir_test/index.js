@@ -14,10 +14,11 @@ function irTest(context)
 
 	this.context = context;
 	this.commandRouter = this.context.coreCommand;
+    self.commandRouter = this.context.coreCommand;
 	this.logger = this.context.logger;
+    self.logger = this.context.logger;
 	this.configManager = this.context.configManager;
 }
-
 
 
 irTest.prototype.onVolumioStart = function()
@@ -74,6 +75,8 @@ irTest.prototype.saveIROptions = function (data)
 {
 	var self = this;
     self.logger.info("irTest.prototype.saveIROptions");
+    
+    self.commandRouter.pushToastMessage('info', "saveIROptions", "called saveIROptions");
 }
 
 irTest.prototype.getUIConfig = function() 
