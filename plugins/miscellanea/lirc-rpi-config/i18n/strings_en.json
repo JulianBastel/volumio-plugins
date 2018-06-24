@@ -1,7 +1,7 @@
 {
   "PLUGIN_CONFIGURATION":"lirc-rpi configuration",
-  "LIRC_RPI"    : "configuration"
-  "IR_RECEIVER" : "infrared receiver"
-  "IR_SENDER"   : "infrared sender"
+  "LIRC_RPI"    : "configuration",
+  "IR_RECEIVER" : "infrared receiver",
+  "IR_SENDER"   : "infrared sender",
   "SAVE":"Save"
 }
