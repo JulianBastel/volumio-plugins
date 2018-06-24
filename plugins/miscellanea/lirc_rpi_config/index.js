@@ -106,8 +106,6 @@ lircRpiConfig.prototype.getUIConfig = function()
                     
                     // Strings for config
                     uiconf.sections[0].content[0].value = self.config.get(c1);
-                    uiconf.sections[0].content[0].value.value = self.config.get(c2);
-                    uiconf.sections[0].content[0].value.label = self.config.get(c2).toString();
                     defer.resolve(uiconf);
                 }
              )
