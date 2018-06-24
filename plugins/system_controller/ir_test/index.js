@@ -107,6 +107,7 @@ irTest.prototype.getUIConfig = function()
 
 irTest.prototype.getConfigurationFiles = function() 
 {
+    var self = this;
     self.logger.info("irTest.prototype.getConfigurationFiles");
 	return ['config.json'];
 }
