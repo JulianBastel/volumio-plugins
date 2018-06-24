@@ -76,7 +76,7 @@ lircRpiConfig.prototype.saveConfig = function(data)
     
     self.config.set("IRReceiver.enabled", data.IRReceiver);
     
-    self.config.set("IRReceiver.pin", data.IRReceiverGPIO);
+    self.config.set("IRReceiver.pin", data.IRReceiverGPIO.value);
     
     //self.config.set("IRSender.enabled", data.IRSender);
     
