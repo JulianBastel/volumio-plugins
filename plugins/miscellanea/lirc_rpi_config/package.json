@@ -1,0 +1,21 @@
+{
+	"name": "lirc_rpi_config",
+	"version": "1.0.0",
+	"description": "A plugin to configure the GPIO ports of lirc-rpi",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "JulianBastel",
+	"license": "ISC",
+	"volumio_info": {
+		"prettyName": "lirc_rpi_config",
+		"icon": "fa-lightbulb-o",
+		"plugin_type": "miscellanea"
+	},
+	"dependencies": {
+		"fs-extra": "^0.28.0",
+		"kew": "^0.7.0",
+		"v-conf": "^1.4.0"
+	}
+}
