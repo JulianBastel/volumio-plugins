@@ -68,12 +68,15 @@ lircRpiConfig.prototype.onRestart = function()
 
 
 // Configuration Methods -----------------------------------------------------------------------------
-lircRpiConfig.prototype.saveConfig = function() 
+lircRpiConfig.prototype.saveConfig = function(data) 
 {
     var self = this;
     self.logger.info("lircRpiConfig.prototype.saveConfig start");
 
     
+    self.config.set("IRReceiver.enabled", data.IRReceiver);
+    
+
     
 
     self.logger.info("lircRpiConfig.prototype.saveConfig stop");
