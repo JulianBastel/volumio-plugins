@@ -112,6 +112,7 @@ lircRpiConfig.prototype.getUIConfig = function()
                     // Strings for config
                     uiconf.sections[0].content[0].value = self.config.get("IRReceiver.enabled");
                     uiconf.sections[0].content[1].value.value = self.config.get("IRReceiver.pin");
+                    uiconf.sections[0].content[1].value.label = self.config.get("IRReceiver.pin").toString();
                     
                     
                     defer.resolve(uiconf);
