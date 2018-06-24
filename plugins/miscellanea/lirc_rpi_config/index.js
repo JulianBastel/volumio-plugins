@@ -75,13 +75,11 @@ lircRpiConfig.prototype.saveConfig = function(data)
 
     
     self.config.set("IRReceiver.enabled", data.IRReceiver);
+    self.config.set("IRReceiver.pin"    ,    data.IRReceiverGPIO.value);
     
-    self.config.set("IRReceiver.pin", data.IRReceiverGPIO.value);
-    
-    //self.config.set("IRSender.enabled", data.IRSender);
-    
+    self.config.set("IRSender.enabled", data.IRSender);
+    self.config.set("IRSender.pin"    , data.IRSenderGPIO.value);
 
-    
 
     self.logger.info("lircRpiConfig.prototype.saveConfig stop");
     
@@ -113,6 +111,10 @@ lircRpiConfig.prototype.getUIConfig = function()
                     uiconf.sections[0].content[0].value = self.config.get("IRReceiver.enabled");
                     uiconf.sections[0].content[1].value.value = self.config.get("IRReceiver.pin");
                     uiconf.sections[0].content[1].value.label = self.config.get("IRReceiver.pin").toString();
+
+                    uiconf.sections[0].content[2].value = self.config.get("IRSender.enabled");
+                    uiconf.sections[0].content[3].value.value = self.config.get("IRSender.pin");
+                    uiconf.sections[0].content[3].value.label = self.config.get("IRSender.pin").toString();
                     
                     
                     defer.resolve(uiconf);
