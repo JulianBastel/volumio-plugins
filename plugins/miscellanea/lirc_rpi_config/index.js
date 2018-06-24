@@ -102,7 +102,7 @@ lircRpiConfig.prototype.getUIConfig = function()
 {
     var defer = libQ.defer();
     var self = this;
-    self.logger.info("lircRpiConfig.prototype.getUIConfig");
+    self.logger.info("lircRpiConfig.prototype.getUIConfig start");
     
     var lang_code = this.commandRouter.sharedVars.get('language_code');
 
@@ -124,6 +124,8 @@ lircRpiConfig.prototype.getUIConfig = function()
                 }
              );
 
+    self.logger.info("lircRpiConfig.prototype.getUIConfig stop");
+             
     return defer.promise;
 };
 
