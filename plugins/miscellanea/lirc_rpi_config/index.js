@@ -71,27 +71,10 @@ lircRpiConfig.prototype.onRestart = function()
 lircRpiConfig.prototype.saveConfig = function() 
 {
     var self = this;
+    self.logger.info("lircRpiConfig.prototype.saveConfig start");
 
-    actions.forEach
-    (
-        function(action, index, array) 
-        {
-             // Strings for data fields
-            var s1 = action.concat('Enabled');
-            var s2 = action.concat('Pin');
 
-            // Strings for config
-            var c1 = action.concat('.enabled');
-            var c2 = action.concat('.pin');
-            var c3 = action.concat('.value');
-
-            self.config.set(c1, data[s1]);
-            self.config.set(c2, data[s2]['value']);
-            self.config.set(c3, 0);
-        }
-    );
-
-    
+    self.logger.info("lircRpiConfig.prototype.saveConfig stop");
     
     self.commandRouter.pushToastMessage('success',"lircRpiConfig", "Configuration saved");
 }
