@@ -91,7 +91,8 @@ lircRpiConfig.prototype.saveConfig = function()
         }
     );
 
-    self.clearTriggers().then(self.createTriggers());
+    
+    
     self.commandRouter.pushToastMessage('success',"lircRpiConfig", "Configuration saved");
 }
 
