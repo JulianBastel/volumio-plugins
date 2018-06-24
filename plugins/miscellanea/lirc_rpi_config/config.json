@@ -1,3 +1,14 @@
 {
- 
+    "IRReceiver":
+    {
+        "enabled": {"value": false, "type": "boolean"},
+        "pin"    : {"value": 17,"type":"number"},
+        "value"  : {"value": 0, "type": "number"}
+    },
+    "IRSender":
+    {
+        "enabled" : {"value": false, "type": "boolean"},
+        "pin"     : {"value": 18,"type":"number"},
+        "value"   : {"value": 0, "type": "number"}
+    },
 }
