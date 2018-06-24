@@ -100,12 +100,10 @@ lircRpiConfig.prototype.getUIConfig = function()
         .then(
                 function(uiconf)
                 {
-                    // Strings for config
-                    var c1 = action.concat('.enabled');
-                    var c2 = action.concat('.pin');
+
                     
                     // Strings for config
-                    uiconf.sections[0].content[0].value = self.config.get(c1);
+                    uiconf.sections[0].content[0].value = self.config.get("IRReceiver.enabled");
                     defer.resolve(uiconf);
                 }
              )
