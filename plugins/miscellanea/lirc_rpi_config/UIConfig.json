@@ -12,9 +12,9 @@
             "icon"    : "fa-plug",
             "onSave"  :
             {     
-                "type":"controller",
-                "endpoint":"miscellanea/lirc_rpi_config",
-                "method":"saveConfig"
+                "type"     :"controller",
+                "endpoint" :"miscellanea/lirc_rpi_config",
+                "method"   :"saveConfig"
             },
             "saveButton": 
             {

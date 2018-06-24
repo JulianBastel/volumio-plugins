@@ -102,7 +102,8 @@ lircRpiConfig.prototype.getUIConfig = function()
 {
     var defer = libQ.defer();
     var self = this;
-
+    self.logger.info("lircRpiConfig.prototype.getUIConfig");
+    
     var lang_code = this.commandRouter.sharedVars.get('language_code');
 
     self.commandRouter.i18nJson(
