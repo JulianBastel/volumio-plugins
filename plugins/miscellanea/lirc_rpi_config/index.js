@@ -114,27 +114,15 @@ lircRpiConfig.prototype.getUIConfig = function()
         .then(
                 function(uiconf)
                 {
-                    var i = 0;
-                    actions.forEach(function(action, index, array) 
-                    {
-                         // Strings for config
-                        var c1 = action.concat('.enabled');
-                        var c2 = action.concat('.pin');
-                        
-                        // accessor supposes actions and uiconfig items are in SAME order
-                        // this is potentially dangerous: rewrite with a JSON search of "id" value ?
-                        uiconf.sections[0].content[2*i].value         = self.config.get(c1);
-                        uiconf.sections[0].content[2*i+1].value.value = self.config.get(c2);
-                        uiconf.sections[0].content[2*i+1].value.label = self.config.get(c2).toString();
-                        i = i + 1;
-                    });
                     defer.resolve(uiconf);
                 }
-        )
-        .fail(function()
-        {
-            defer.reject(new Error());
-        });
+             )
+        .fail(
+                function()
+                {
+                    defer.reject(new Error());
+                }
+             );
 
     return defer.promise;
 };
@@ -163,7 +151,3 @@ lircRpiConfig.prototype.setConf = function(varName, varValue)
 };
 
 
-
-lircRpiConfig.prototype._searchTracks = function (results) {
-
-};
