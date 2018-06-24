@@ -73,6 +73,8 @@ lircRpiConfig.prototype.saveConfig = function()
     var self = this;
     self.logger.info("lircRpiConfig.prototype.saveConfig start");
 
+    
+    
 
     self.logger.info("lircRpiConfig.prototype.saveConfig stop");
     
@@ -91,13 +93,21 @@ lircRpiConfig.prototype.getUIConfig = function()
     var lang_code = this.commandRouter.sharedVars.get('language_code');
 
     self.commandRouter.i18nJson(
-        __dirname+'/i18n/strings_'+lang_code+'.json',
+        __dirname+'/i18n/strings_'+ lang_code +'.json',
         __dirname+'/i18n/strings_en.json',
         __dirname + '/UIConfig.json'
         )
         .then(
                 function(uiconf)
                 {
+                    // Strings for config
+                    var c1 = action.concat('.enabled');
+                    var c2 = action.concat('.pin');
+                    
+                    // Strings for config
+                    uiconf.sections[0].content[0].value = self.config.get(c1);
+                    uiconf.sections[0].content[0].value.value = self.config.get(c2);
+                    uiconf.sections[0].content[0].value.label = self.config.get(c2).toString();
                     defer.resolve(uiconf);
                 }
              )
