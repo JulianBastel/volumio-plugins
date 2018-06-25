@@ -155,7 +155,7 @@ lircRpiConfig.prototype.writeBootStr = function(data)
     
     if (data.IRSender) 
     {
-        bootstring =  bootstring.concat(",gpio_in_pin=" + data.IRSenderGPIO.value.toString());
+        bootstring =  bootstring.concat(",gpio_out_pin=" + data.IRSenderGPIO.value.toString());
     }
 
     bootstring =  bootstring.concat(os.EOL);
