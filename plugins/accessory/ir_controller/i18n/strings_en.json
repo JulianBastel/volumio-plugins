@@ -2,6 +2,8 @@
   "PLUGIN_NAME" : "lirc-rpi config",
   "IR_CONFIGURATION":"IR Remote Configuration",
   "REBOOT_MSG":"A reboot is required for the change to take effect.",
+  "ERR_WRITE":"Error writing ",
+  "ERR_READ":"Error reading ",
   "NO_CHANGES":"No changes to save.",
   "SAVE": "Save",
   "PROFILE_SELECTOR": "Select profile",

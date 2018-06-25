@@ -85,7 +85,7 @@ lircRpiConfig.prototype.saveConfig = function(data)
                 
         self.config.set("IRReceiver.pin"    , data.IRReceiverGPIO.value);
         self.config.set("IRSender.pin"      , data.IRSenderGPIO.value);
-        
+        self.writeBootStr();
         responseData = 
         {
             title: self.commandRouter.getI18nString("PLUGIN_NAME"),
@@ -128,6 +128,66 @@ lircRpiConfig.prototype.closeModals = function()
     var self = this;
 
     self.commandRouter.closeModals();
+};
+
+
+
+// The functions "writeBootStr" and "rmBootStr" are derived from "writeI2SDAC" and "disableI2SDAC" of
+// Volumio's i2s_dacs plugin; many thanks to its coders for the inspiration
+
+remotepi.prototype.writeBootStr = function(data) 
+{
+    var self = this;
+    var gpioOut = "gpio_out_pin=";
+    var gpioIn  = "gpio_in_pin=";
+    
+    var bootstring = "dtoverlay=lirc-rpi" + os.EOL;
+    var searchexp = new RegExp(lircOverlayBanner + "dtoverlay=.*" + os.EOL);
+    var configFile = "/boot/config.txt";
+    var newConfigTxt;
+
+    if (self.config.get("IRReceiver.enabled")) 
+    {
+        bootstring =  bootstring.concat(",gpio_in_pin=" + data.IRReceiverGPIO.value.toString());
+    }
+    
+    if (self.config.get("IRSender.enabled")) 
+    {
+        bootstring =  bootstring.concat(",gpio_in_pin=" + data.IRSenderGPIO.value.toString());
+    }
+
+    bootstring =  bootstring.concat(os.EOL);
+    
+    
+    fs.readFile
+    (   
+        configFile, 
+        "utf8", 
+        function (error, configTxt) 
+        {
+            if (error) 
+            {
+                self.logger.error("Error reading " + configFile + ": " + error);
+                self.commandRouter.pushToastMessage("error", self.commandRouter.getI18nString("PLUGIN_NAME"), self.commandRouter.getI18nString("ERR_READ") + configFile + ": " + error);
+            } 
+            else 
+            {
+                newConfigTxt = configTxt.replace(searchexp, lircOverlayBanner + bootstring);
+                if (configTxt == newConfigTxt && configTxt.search(lircOverlayBanner + bootstring) == -1) 
+                {
+                    newConfigTxt = configTxt + os.EOL + lircOverlayBanner + bootstring + os.EOL;
+                }
+                fs.writeFile(configFile, newConfigTxt, "utf8", function (error) 
+                {
+                    if (error) 
+                    {
+                        self.logger.error("Error writing " + configFile + ": " + error);
+                        self.commandRouter.pushToastMessage("error", self.commandRouter.getI18nString("PLUGIN_NAME"), self.commandRouter.getI18nString("ERR_WRITE") + configFile + ": " + error);
+                    }
+                });
+            }
+        }
+    );
 };
 
 
