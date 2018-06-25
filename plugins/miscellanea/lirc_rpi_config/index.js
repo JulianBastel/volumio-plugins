@@ -135,7 +135,7 @@ lircRpiConfig.prototype.closeModals = function()
 // The functions "writeBootStr" and "rmBootStr" are derived from "writeI2SDAC" and "disableI2SDAC" of
 // Volumio's i2s_dacs plugin; many thanks to its coders for the inspiration
 
-remotepi.prototype.writeBootStr = function(data) 
+lircRpiConfig.prototype.writeBootStr = function(data) 
 {
     var self = this;
     var gpioOut = "gpio_out_pin=";
