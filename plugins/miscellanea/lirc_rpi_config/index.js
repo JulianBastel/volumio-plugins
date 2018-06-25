@@ -79,7 +79,7 @@ lircRpiConfig.prototype.saveConfig = function(data)
     self.config.set("IRReceiver.enabled", data.IRReceiver);
     self.config.set("IRSender.enabled", data.IRSender);
     
-    if(self.config.get("IRReceiver.pin") != data.IRReceiverGPIO.value || self.config.get("IRSender.pin") != data.IRSenderGPIO.value)
+    if( ((self.config.get("IRReceiver.pin") != data.IRReceiverGPIO.value) && (data.IRReceiver)) || ((self.config.get("IRSender.pin") != data.IRSenderGPIO.value) && (data.IRSender)))
     {
         self.logger.info("lircRpiConfig.prototype.saveConfig pin change");
                 
@@ -129,6 +129,7 @@ lircRpiConfig.prototype.closeModals = function()
 
     self.commandRouter.closeModals();
 };
+
 
 
 
