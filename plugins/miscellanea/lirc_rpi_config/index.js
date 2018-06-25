@@ -141,7 +141,7 @@ lircRpiConfig.prototype.writeBootStr = function(data)
     var gpioOut = "gpio_out_pin=";
     var gpioIn  = "gpio_in_pin=";
     
-    var bootstring = "dtoverlay=lirc-rpi" + os.EOL;
+    var bootstring = "dtoverlay=lirc-rpi";
     var searchexp = new RegExp(lircOverlayBanner + "dtoverlay=.*" + os.EOL);
     var configFile = "/boot/config.txt";
     var newConfigTxt;
