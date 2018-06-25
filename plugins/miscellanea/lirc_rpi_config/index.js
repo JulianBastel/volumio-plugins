@@ -85,7 +85,7 @@ lircRpiConfig.prototype.saveConfig = function(data)
                 
         self.config.set("IRReceiver.pin"    , data.IRReceiverGPIO.value);
         self.config.set("IRSender.pin"      , data.IRSenderGPIO.value);
-        self.writeBootStr();
+        self.writeBootStr(data);
         responseData = 
         {
             title: self.commandRouter.getI18nString("PLUGIN_NAME"),
@@ -146,12 +146,14 @@ lircRpiConfig.prototype.writeBootStr = function(data)
     var configFile = "/boot/config.txt";
     var newConfigTxt;
 
-    if (self.config.get("IRReceiver.enabled")) 
+    self.logger.info("lircRpiConfig.prototype.writeBootStr start");
+    
+    if (data.IRReceiver) 
     {
         bootstring =  bootstring.concat(",gpio_in_pin=" + data.IRReceiverGPIO.value.toString());
     }
     
-    if (self.config.get("IRSender.enabled")) 
+    if (data.IRSender) 
     {
         bootstring =  bootstring.concat(",gpio_in_pin=" + data.IRSenderGPIO.value.toString());
     }
@@ -188,6 +190,8 @@ lircRpiConfig.prototype.writeBootStr = function(data)
             }
         }
     );
+    
+    self.logger.info("lircRpiConfig.prototype.writeBootStr stop");
 };
 
 
