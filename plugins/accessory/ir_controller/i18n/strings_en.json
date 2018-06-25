@@ -1,5 +1,8 @@
 {
+  "PLUGIN_NAME" : "lirc-rpi config",
   "IR_CONFIGURATION":"IR Remote Configuration",
+  "REBOOT_MSG":"A reboot is required for the change to take effect.",
+  "NO_CHANGES":"No changes to save.",
   "SAVE": "Save",
   "PROFILE_SELECTOR": "Select profile",
   "PROFILE_SELECTOR_DOC": "Select the appropriate configuration for your remote from the available profiles"

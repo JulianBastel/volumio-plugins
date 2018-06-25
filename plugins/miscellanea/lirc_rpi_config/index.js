@@ -77,21 +77,58 @@ lircRpiConfig.prototype.saveConfig = function(data)
 
     
     self.config.set("IRReceiver.enabled", data.IRReceiver);
+    self.config.set("IRSender.enabled", data.IRSender);
     
-    if(self.config.get("IRReceiver.pin") != data.IRReceiverGPIO.value)
+    if(self.config.get("IRReceiver.pin") != data.IRReceiverGPIO.value || self.config.get("IRSender.pin") != data.IRSenderGPIO.value)
     {
-        self.logger.info("lircRpiConfig.prototype.saveConfig IRReceiver.pin change");
+        self.logger.info("lircRpiConfig.prototype.saveConfig pin change");
+                
         self.config.set("IRReceiver.pin"    , data.IRReceiverGPIO.value);
+        self.config.set("IRSender.pin"    , data.IRSenderGPIO.value);
+        
+        responseData = 
+        {
+            title: self.commandRouter.getI18nString("PLUGIN_NAME"),
+            message: self.commandRouter.getI18nString("REBOOT_MSG"),
+            size: "lg",
+            buttons: 
+            [
+                {
+                    name: self.commandRouter.getI18nString("COMMON.RESTART"),
+                    class: "btn btn-default",
+                    emit: "reboot",
+                    payload: ""
+                },
+                {
+                    name: self.commandRouter.getI18nString("COMMON.CONTINUE"),
+                    class: "btn btn-info",
+                    emit: "callMethod",
+                    payload: {"endpoint":"miscellanea/lirc_rpi_config", "method":"closeModals"}
+                }
+            ]
+        }
+        self.commandRouter.broadcastMessage("openModal", responseData);
+    }
+    else 
+    {
+        self.commandRouter.pushToastMessage("info", self.commandRouter.getI18nString("PLUGIN_NAME"), self.commandRouter.getI18nString("NO_CHANGES"));
     }
     
 
-    self.config.set("IRSender.enabled", data.IRSender);
-    self.config.set("IRSender.pin"    , data.IRSenderGPIO.value);
+
 
     self.logger.info("lircRpiConfig.prototype.saveConfig stop");
     
     self.commandRouter.pushToastMessage('success',"lircRpiConfig", "Configuration saved");
 }
+
+
+lircRpiConfig.prototype.closeModals = function() 
+{
+    var self = this;
+
+    self.commandRouter.closeModals();
+};
 
 
 
