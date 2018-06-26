@@ -118,17 +118,7 @@ lircRpiConfig.prototype.saveConfig = function(data)
     self.config.set("IRReceiver.enabled", data.IRReceiver);
     self.config.set("IRReceiver.pin"    , data.IRReceiverGPIO.value);
 
-    
-    
-    if(iRReceiverRestart)
-    {
-        self.logger.info("reboot because changes of iRReceiver");
-    }    
-    else
-    {
-        self.logger.info("no reboot because no changes of iRReceiver");
-    }
-    
+
 
     if(self.config.get("IRSender.enabled") == data.IRSender)
     {
@@ -161,32 +151,21 @@ lircRpiConfig.prototype.saveConfig = function(data)
     }
     
     
-    if(iRSenderRestart)
+    if( iRSenderRestart || iRReceiverRestart)
     {
-        self.logger.info("reboot because changes of iRSender");
-    }    
-    else
-    {
-        self.logger.info("no reboot because no changes of iRSender");
-    }
+        self.config.set("IRSender.enabled", data.IRSender);
+        self.config.set("IRSender.pin"    , data.IRSenderGPIO.value);
+        
+
+        self.config.set("IRReceiver.enabled", data.IRReceiver);
+        self.config.set("IRSender.enabled", data.IRSender);
     
-    
-    self.config.set("IRSender.enabled", data.IRSender);
-    self.config.set("IRSender.pin"      , data.IRSenderGPIO.value);
-    
-    /*
-    
-    
-    self.config.set("IRReceiver.enabled", data.IRReceiver);
-    self.config.set("IRSender.enabled", data.IRSender);
-    
-    if( ((self.config.get("IRReceiver.pin") != data.IRReceiverGPIO.value) && (data.IRReceiver)) || ((self.config.get("IRSender.pin") != data.IRSenderGPIO.value) && (data.IRSender)))
-    {
+
         self.logger.info("lircRpiConfig.prototype.saveConfig pin change");
                 
         self.config.set("IRReceiver.pin"    , data.IRReceiverGPIO.value);
         self.config.set("IRSender.pin"      , data.IRSenderGPIO.value);
-        self.writeBootStr(data);
+        //self.writeBootStr(data);
         responseData = 
         {
             title: self.commandRouter.getI18nString("PLUGIN_NAME"),
@@ -197,8 +176,8 @@ lircRpiConfig.prototype.saveConfig = function(data)
                 {
                     name: self.commandRouter.getI18nString("COMMON.RESTART"),
                     class: "btn btn-default",
-                    emit: "reboot",
-                    payload: ""
+                    emit: "callMethod",
+                    payload: {"endpoint":"miscellanea/lirc_rpi_config", "method":"reboot"}
                 },
                 {
                     name: self.commandRouter.getI18nString("COMMON.CONTINUE"),
@@ -215,7 +194,7 @@ lircRpiConfig.prototype.saveConfig = function(data)
         self.commandRouter.pushToastMessage("info", self.commandRouter.getI18nString("PLUGIN_NAME"), self.commandRouter.getI18nString("NO_CHANGES"));
     }
     
-    */
+    
 
 
     self.logger.info("lircRpiConfig.prototype.saveConfig stop");
@@ -227,8 +206,19 @@ lircRpiConfig.prototype.saveConfig = function(data)
 lircRpiConfig.prototype.closeModals = function() 
 {
     var self = this;
-
+    
+    self.logger.info("lircRpiConfig.prototype.closeModals ");
+    
     self.commandRouter.closeModals();
+    this.emit('reboot', '')
+};
+
+lircRpiConfig.prototype.reboot = function() 
+{
+    var self = this;
+    
+    self.logger.info("lircRpiConfig.prototype.reboot ");
+    this.emit('unknown', msg)
 };
 
 
