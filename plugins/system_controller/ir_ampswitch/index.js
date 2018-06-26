@@ -5,6 +5,8 @@ var fs=require('fs-extra');
 var config = new (require('v-conf'))();
 var exec = require('child_process').exec;
 var execSync = require('child_process').execSync;
+var io = require('socket.io-client');
+var socket = io.connect('http://localhost:3000');
 
 
 module.exports = irAmpswitch;
@@ -16,6 +18,14 @@ function irAmpswitch(context)
     this.commandRouter = this.context.coreCommand;
     this.logger = this.context.logger;
     this.configManager = this.context.configManager;
+    
+    // Setup Debugger
+    self.logger.ASdebug = function(data) 
+    {
+        self.logger.info('[ASDebug] ' + data);
+    };
+
+    self.shutdown;
 }
 
 
@@ -34,6 +44,16 @@ irAmpswitch.prototype.onStart = function()
 {
     var self = this;
     var defer = libQ.defer();
+    
+    // read and parse status once
+    socket.emit('getState','');
+    socket.once('pushState', self.parseStatus.bind(self));
+    
+    
+    // listen to every subsequent status report from Volumio
+    // status is pushed after every playback action, so we will be
+    // notified if the status changes
+    socket.on('pushState', self.parseStatus.bind(self));
 
     // Once the Plugin has successfull started resolve the promise
     defer.resolve();
@@ -101,7 +121,23 @@ irAmpswitch.prototype.parseStatus = function(state)
                     delay
                 );
     }
+};
 
+
+//switch output port off
+AmpSwitchController.prototype.off = function() 
+{
+    var self = this;
+    self.logger.ASdebug('Togle GPIO: OFF');
+    
+    if(!self.config.get('inverted'))
+    {
+        self.logger.info("irAmpswitch.prototype.getUIConfig writeSync(0)");
+    } 
+    else 
+    {
+        self.logger.info("irAmpswitch.prototype.getUIConfig writeSync(1)");
+    }
 };
 
 
