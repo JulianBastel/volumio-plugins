@@ -129,7 +129,7 @@ irAmpswitch.prototype.getUIConfig = function()
 {
     var defer = libQ.defer();
     var self = this;
-    self.logger.info("irAmpswitch.prototype.getUIConfig");
+    self.logger.info("irAmpswitch.prototype.getUIConfig start");
         
     var lang_code = this.commandRouter.sharedVars.get('language_code');
 
@@ -155,14 +155,18 @@ irAmpswitch.prototype.getUIConfig = function()
         }
     );
 
+    self.logger.info("irAmpswitch.prototype.getUIConfig stop");
+    
     return defer.promise;
 };
+
 
 irAmpswitch.prototype.getConfigurationFiles = function() 
 {
     self.logger.info("irAmpswitch.prototype.getConfigurationFiles");
     return ['config.json'];
 }
+
 
 irAmpswitch.prototype.setUIConfig = function(data) 
 {
@@ -171,12 +175,14 @@ irAmpswitch.prototype.setUIConfig = function(data)
     self.logger.info("irAmpswitch.prototype.setUIConfig");
 };
 
+
 irAmpswitch.prototype.getConf = function(varName) 
 {
     var self = this;
     //Perform your installation tasks here
     self.logger.info("irAmpswitch.prototype.getConf");
 };
+
 
 irAmpswitch.prototype.setConf = function(varName, varValue) 
 {
