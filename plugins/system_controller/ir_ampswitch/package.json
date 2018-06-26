@@ -3,17 +3,20 @@
     "version": "1.0.0",
     "description": "plugin in to switch onoff the amplifier via infrared",
     "main": "index.js",
-    "scripts": {
+    "scripts": 
+    {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "JulianBastel",
     "license": "ISC",
-    "volumio_info": {
+    "volumio_info": 
+    {
         "prettyName": "ir_ampswitch",
         "icon": "fa-lightbulb-o",
         "plugin_type": "system_controller"
     },
-    "dependencies": {
+    "dependencies": 
+    {
         "fs-extra": "^0.28.0",
         "kew": "^0.7.0",
         "v-conf": "^1.4.0",
