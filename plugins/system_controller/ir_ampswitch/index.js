@@ -66,7 +66,7 @@ irAmpswitch.prototype.saveOptions = function(data)
     self.logger.info("irAmpswitch.prototype.saveOptions");
     
     
-    self.config.set('delay', data.delay_setting.value);
+    self.config.set('delay', data.delay_setting);
     
     self.commandRouter.pushToastMessage('info', "saveOptions", "called saveOptions");
 }
