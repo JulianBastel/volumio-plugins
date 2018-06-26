@@ -163,6 +163,7 @@ irAmpswitch.prototype.getUIConfig = function()
 
 irAmpswitch.prototype.getConfigurationFiles = function() 
 {
+    var self = this;
     self.logger.info("irAmpswitch.prototype.getConfigurationFiles");
     return ['config.json'];
 }
