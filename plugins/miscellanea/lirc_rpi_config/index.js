@@ -23,6 +23,7 @@ function lircRpiConfig(context)
     this.logger = this.context.logger;
     this.configManager = this.context.configManager;
 
+
 }
 
 
@@ -244,6 +245,8 @@ lircRpiConfig.prototype.writeBootStr = function(data)
     self.logger.info("lircRpiConfig.prototype.writeBootStr stop");
 };
 
+
+
 remotepi.prototype.rmBootStr = function() 
 {
     var self = this;
@@ -282,8 +285,6 @@ remotepi.prototype.rmBootStr = function()
         }
     );
 };
-
-
 
 lircRpiConfig.prototype.getUIConfig = function() 
 {

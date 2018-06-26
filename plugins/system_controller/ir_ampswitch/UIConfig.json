@@ -1,34 +1,43 @@
 {
-  "page": {
-    "label": "TRANSLATE.IR_CONFIGURATION"
-  },
-  "sections": [
+    "page": 
     {
-      "id": "ir_conf",
-      "element": "section",
-      "label": "TRANSLATE.IR_CONFIGURATION",
-      "icon": "fa-magic",
-      "onSave": {"type":"controller", "endpoint":"system_controller/ir_ampswitch", "method":"saveOptions"},
-      "saveButton": {
-        "label": "TRANSLATE.SAVE",
-        "data": [
-          "ir_profile"
-        ]
-      },
-      "value": {
-      },
-      "content": [
+        "label": "TRANSLATE.IR_CONFIGURATION"
+    },
+    "sections": 
+    [
         {
-          "id": "ir_profile",
-          "element": "select",
-          "doc": "TRANSLATE.PROFILE_SELECTOR_DOC",
-          "label": "TRANSLATE.PROFILE_SELECTOR",
-          "value": {
-          },
-          "options": [
-          ]
+            "id"     : "ir_conf",
+            "element": "section",
+            "label"  : "TRANSLATE.IR_CONFIGURATION",
+            "icon"   : "fa-magic",
+            "onSave" :
+            {
+                "type"    :"controller",
+                "endpoint":"system_controller/ir_ampswitch",
+                "method"  :"saveOptions"
+            },
+            "saveButton":
+            {
+                "label": "TRANSLATE.SAVE",
+                "data" :
+                [
+                    "ir_profile"
+                ]
+            },
+            "value": 
+            {
+            },
+            "content": 
+            [
+                {
+                "id"     : "delay_setting",
+                "element": "input",
+                "type"   : "number",
+                "label"  : "TRANSLATE.DELAY",
+                "doc"    : "TRANSLATE.DELAY_DOC",
+                "value"  : 1000
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
