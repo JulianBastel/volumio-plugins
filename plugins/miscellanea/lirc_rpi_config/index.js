@@ -22,8 +22,6 @@ function lircRpiConfig(context)
     this.commandRouter = this.context.coreCommand;
     this.logger = this.context.logger;
     this.configManager = this.context.configManager;
-
-
 }
 
 

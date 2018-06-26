@@ -16,28 +16,16 @@ function irAmpswitch(context)
     this.commandRouter = this.context.coreCommand;
     this.logger = this.context.logger;
     this.configManager = this.context.configManager;
-
-    self.logger.info("irAmpswitch");
-    
-        
-    // Setup Debugger
-    self.logger.ASdebug = function(data)
-    {
-        self.logger.info('[ASDebug] ' + data);
-    };
-    
 }
 
 
 irAmpswitch.prototype.onVolumioStart = function()
 {
     var self = this;
-    var configFile=this.commandRouter.pluginManager.getConfigurationFile(this.context,'config.json');
+    var configFile = this.commandRouter.pluginManager.getConfigurationFile(this.context,'config.json');
     this.config = new (require('v-conf'))();
     this.config.loadFile(configFile);
     
-    self.logger.info("irAmpswitch.prototype.onVolumioStart");
-
     return libQ.resolve();
 }
 
@@ -45,9 +33,7 @@ irAmpswitch.prototype.onVolumioStart = function()
 irAmpswitch.prototype.onStart = function() 
 {
     var self = this;
-    var defer=libQ.defer();
-
-    self.logger.info("irAmpswitch.prototype.onStart");
+    var defer = libQ.defer();
 
     // Once the Plugin has successfull started resolve the promise
     defer.resolve();
@@ -59,8 +45,6 @@ irAmpswitch.prototype.onStop = function()
 {
     var self = this;
     var defer=libQ.defer();
-    
-    self.logger.info("irAmpswitch.prototype.onStop");
 
     // Once the Plugin has successfull stopped resolve the promise
     defer.resolve();
@@ -70,10 +54,8 @@ irAmpswitch.prototype.onStop = function()
 
 irAmpswitch.prototype.onRestart = function() 
 {
-    
     var self = this;
-    // Optional, use if you need it
-    self.logger.info("irAmpswitch.prototype.onRestart");
+
 };
 
 
@@ -83,10 +65,8 @@ irAmpswitch.prototype.saveOptions = function(data)
     var self = this;
     self.logger.info("irAmpswitch.prototype.saveOptions");
     
-    // save port setting to our config
-    self.logger.ASdebug('Saving Settings: Delay: ' + data.delay_setting);
     
-    self.config.set('delay', data.delay_setting);
+    self.config.set('delay', data.delay_setting.value);
     
     self.commandRouter.pushToastMessage('info', "saveOptions", "called saveOptions");
 }
@@ -163,17 +143,13 @@ irAmpswitch.prototype.getUIConfig = function()
 
 irAmpswitch.prototype.getConfigurationFiles = function() 
 {
-    var self = this;
-    self.logger.info("irAmpswitch.prototype.getConfigurationFiles");
     return ['config.json'];
 }
-
 
 irAmpswitch.prototype.setUIConfig = function(data) 
 {
     var self = this;
     //Perform your installation tasks here
-    self.logger.info("irAmpswitch.prototype.setUIConfig");
 };
 
 
@@ -181,7 +157,6 @@ irAmpswitch.prototype.getConf = function(varName)
 {
     var self = this;
     //Perform your installation tasks here
-    self.logger.info("irAmpswitch.prototype.getConf");
 };
 
 
@@ -189,5 +164,4 @@ irAmpswitch.prototype.setConf = function(varName, varValue)
 {
     var self = this;
     //Perform your installation tasks here
-    self.logger.info("irAmpswitch.prototype.setConf");
 };
