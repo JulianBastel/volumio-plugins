@@ -176,14 +176,8 @@ lircRpiConfig.prototype.saveConfig = function(data)
                 {
                     name: self.commandRouter.getI18nString("COMMON.RESTART"),
                     class: "btn btn-default",
-                    emit: "callMethod",
-                    payload: {"endpoint":"miscellanea/lirc_rpi_config", "method":"reboot"}
-                },
-                {
-                    name: self.commandRouter.getI18nString("COMMON.CONTINUE"),
-                    class: "btn btn-info",
-                    emit: "callMethod",
-                    payload: {"endpoint":"miscellanea/lirc_rpi_config", "method":"closeModals"}
+                    emit: "reboot",
+                    payload: ""
                 }
             ]
         }
