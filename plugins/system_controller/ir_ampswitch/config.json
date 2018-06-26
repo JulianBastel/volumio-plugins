@@ -1,3 +1,7 @@
 {
- 
+    "delay":
+    {
+        "type": "number",
+        "value": 720
+    }
 }

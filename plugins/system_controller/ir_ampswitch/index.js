@@ -78,11 +78,15 @@ irAmpswitch.prototype.onRestart = function()
 
 
 // Configuration Methods -----------------------------------------------------------------------------
-irAmpswitch.prototype.saveOptions = function (data) 
+irAmpswitch.prototype.saveOptions = function(data)
 {
     var self = this;
-    
     self.logger.info("irAmpswitch.prototype.saveOptions");
+    
+    // save port setting to our config
+    self.logger.ASdebug('Saving Settings: Delay: ' + data.delay_setting);
+    
+    self.config.set('delay', data.delay_setting);
     
     self.commandRouter.pushToastMessage('info', "saveOptions", "called saveOptions");
 }
@@ -121,10 +125,6 @@ irAmpswitch.prototype.parseStatus = function(state)
 };
 
 
-
-
-
-
 irAmpswitch.prototype.getUIConfig = function() 
 {
     var defer = libQ.defer();
@@ -133,19 +133,27 @@ irAmpswitch.prototype.getUIConfig = function()
         
     var lang_code = this.commandRouter.sharedVars.get('language_code');
 
-    self.commandRouter.i18nJson(__dirname+'/i18n/strings_'+lang_code+'.json',
+    self.commandRouter.i18nJson
+    (
+        __dirname+'/i18n/strings_'+lang_code+'.json',
         __dirname+'/i18n/strings_en.json',
-        __dirname + '/UIConfig.json')
-        .then(function(uiconf)
+        __dirname + '/UIConfig.json'
+    )
+    .then
+    (
+        function(uiconf)
         {
-
-
+            uiconf.sections[0].content[0].value = self.config.get('delay');
             defer.resolve(uiconf);
-        })
-        .fail(function()
+        }
+    )
+    .fail
+    (
+        function()
         {
             defer.reject(new Error());
-        });
+        }
+    );
 
     return defer.promise;
 };
