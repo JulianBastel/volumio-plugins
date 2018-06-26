@@ -68,13 +68,114 @@ lircRpiConfig.prototype.onRestart = function()
 
 
 // Configuration Methods -----------------------------------------------------------------------------
+
+
+
+
+
 lircRpiConfig.prototype.saveConfig = function(data) 
 {
     var self = this;
     var responseData;
+    var iRReceiverRestart;
+    var iRSenderRestart;
+    
+    
         
     self.logger.info("lircRpiConfig.prototype.saveConfig start");
 
+    
+    if(self.config.get("IRReceiver.enabled") == data.IRReceiver)
+    {
+        // no state changed,
+        if(data.IRReceiver) // receiver is on
+        {
+            //IRReceiver is on and pin changed?
+            if( (self.config.get("IRReceiver.pin") != data.IRReceiverGPIO.value) )
+            {
+                //pin changed
+                iRReceiverRestart = true;
+            }
+            else
+            {
+                 //pin not changed
+                iRReceiverRestart = false;
+            }
+        }
+        else // receiver is off and was off
+        {
+            iRReceiverRestart = false;
+        }
+    }
+    else
+    {
+        // do a restart because 
+        // receiver is now activated 
+        // or receiver is now deactivated 
+        iRReceiverRestart = true;
+    }
+    
+    self.config.set("IRReceiver.enabled", data.IRReceiver);
+    self.config.set("IRReceiver.pin"    , data.IRReceiverGPIO.value);
+
+    
+    
+    if(iRReceiverRestart)
+    {
+        self.logger.info("reboot because changes of iRReceiver");
+    }    
+    else
+    {
+        self.logger.info("no reboot because no changes of iRReceiver");
+    }
+    
+
+    if(self.config.get("IRSender.enabled") == data.IRSender)
+    {
+        // no state changed,
+        if(data.IRSender) // Sender is on
+        {
+            //IRSender is on and pin changed?
+            if( (self.config.get("IRSender.pin") != data.IRSenderGPIO.value) )
+            {
+                //pin changed
+                iRSenderRestart = true;
+            }
+            else
+            {
+                 //pin not changed
+                iRSenderRestart = false;
+            }
+        }
+        else // Sender is off and was off
+        {
+            iRSenderRestart = false;
+        }
+    }
+    else
+    {
+        // do a restart because 
+        // Sender is now activated 
+        // or Sender is now deactivated 
+        iRSenderRestart = true;
+    }
+    
+    
+    if(iRSenderRestart)
+    {
+        self.logger.info("reboot because changes of iRSender");
+    }    
+    else
+    {
+        self.logger.info("no reboot because no changes of iRSender");
+    }
+    
+    
+    self.config.set("IRSender.enabled", data.IRSender);
+    self.config.set("IRSender.pin"      , data.IRSenderGPIO.value);
+    
+    /*
+    
     
     self.config.set("IRReceiver.enabled", data.IRReceiver);
     self.config.set("IRSender.enabled", data.IRSender);
@@ -114,7 +215,7 @@ lircRpiConfig.prototype.saveConfig = function(data)
         self.commandRouter.pushToastMessage("info", self.commandRouter.getI18nString("PLUGIN_NAME"), self.commandRouter.getI18nString("NO_CHANGES"));
     }
     
-
+    */
 
 
     self.logger.info("lircRpiConfig.prototype.saveConfig stop");
