@@ -184,15 +184,18 @@ lircRpiConfig.prototype.saveConfig = function(data)
 lircRpiConfig.prototype.writeBootStr = function(data) 
 {
     var self = this;
-    var gpioOut = "gpio_out_pin=";
-    var gpioIn  = "gpio_in_pin=";
-    
-    var bootstring = "dtoverlay=lirc-rpi";
+    var bootstring = "";
     var searchexp = new RegExp(lircOverlayBanner + "dtoverlay=.*" + os.EOL);
     var configFile = "/boot/config.txt";
     var newConfigTxt;
 
     self.logger.info("lircRpiConfig.prototype.writeBootStr start");
+    
+    
+    if(data.IRReceiver || data.IRSender)
+    {
+        bootstring = "dtoverlay=lirc-rpi";
+    }
     
     if (data.IRReceiver) 
     {
