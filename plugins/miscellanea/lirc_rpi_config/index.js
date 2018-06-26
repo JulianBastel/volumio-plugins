@@ -68,23 +68,15 @@ lircRpiConfig.prototype.onRestart = function()
 
 
 // Configuration Methods -----------------------------------------------------------------------------
-
-
-
-
-
 lircRpiConfig.prototype.saveConfig = function(data) 
 {
     var self = this;
     var responseData;
     var iRReceiverRestart;
     var iRSenderRestart;
-    
-    
-        
     self.logger.info("lircRpiConfig.prototype.saveConfig start");
 
-    
+ 
     if(self.config.get("IRReceiver.enabled") == data.IRReceiver)
     {
         // no state changed,
@@ -114,10 +106,6 @@ lircRpiConfig.prototype.saveConfig = function(data)
         // or receiver is now deactivated 
         iRReceiverRestart = true;
     }
-    
-    self.config.set("IRReceiver.enabled", data.IRReceiver);
-    self.config.set("IRReceiver.pin"    , data.IRReceiverGPIO.value);
-
 
 
     if(self.config.get("IRSender.enabled") == data.IRSender)
@@ -151,21 +139,15 @@ lircRpiConfig.prototype.saveConfig = function(data)
     }
     
     
-    if( iRSenderRestart || iRReceiverRestart)
+    if(iRSenderRestart || iRReceiverRestart)
     {
         self.config.set("IRSender.enabled", data.IRSender);
         self.config.set("IRSender.pin"    , data.IRSenderGPIO.value);
         
-
         self.config.set("IRReceiver.enabled", data.IRReceiver);
-        self.config.set("IRSender.enabled", data.IRSender);
-    
-
-        self.logger.info("lircRpiConfig.prototype.saveConfig pin change");
-                
         self.config.set("IRReceiver.pin"    , data.IRReceiverGPIO.value);
-        self.config.set("IRSender.pin"      , data.IRSenderGPIO.value);
-        //self.writeBootStr(data);
+        
+        self.writeBootStr(data);
         responseData = 
         {
             title: self.commandRouter.getI18nString("PLUGIN_NAME"),
@@ -189,31 +171,10 @@ lircRpiConfig.prototype.saveConfig = function(data)
     }
     
     
-
-
     self.logger.info("lircRpiConfig.prototype.saveConfig stop");
-    
     self.commandRouter.pushToastMessage('success',"lircRpiConfig", "Configuration saved");
 }
 
-
-lircRpiConfig.prototype.closeModals = function() 
-{
-    var self = this;
-    
-    self.logger.info("lircRpiConfig.prototype.closeModals ");
-    
-    self.commandRouter.closeModals();
-   
-};
-
-lircRpiConfig.prototype.reboot = function() 
-{
-    var self = this;
-    
-    self.logger.info("lircRpiConfig.prototype.reboot ");
-    this.emit('reboot', '')
-};
 
 
 
@@ -247,26 +208,26 @@ lircRpiConfig.prototype.writeBootStr = function(data)
     
     
     fs.readFile
-    (   
-        configFile, 
-        "utf8", 
+    (
+        configFile,
+        "utf8",
         function (error, configTxt) 
         {
-            if (error) 
+            if(error)
             {
                 self.logger.error("Error reading " + configFile + ": " + error);
                 self.commandRouter.pushToastMessage("error", self.commandRouter.getI18nString("PLUGIN_NAME"), self.commandRouter.getI18nString("ERR_READ") + configFile + ": " + error);
             } 
-            else 
+            else
             {
                 newConfigTxt = configTxt.replace(searchexp, lircOverlayBanner + bootstring);
-                if (configTxt == newConfigTxt && configTxt.search(lircOverlayBanner + bootstring) == -1) 
+                if (configTxt == newConfigTxt && configTxt.search(lircOverlayBanner + bootstring) == -1)
                 {
                     newConfigTxt = configTxt + os.EOL + lircOverlayBanner + bootstring + os.EOL;
                 }
                 fs.writeFile(configFile, newConfigTxt, "utf8", function (error) 
                 {
-                    if (error) 
+                    if (error)
                     {
                         self.logger.error("Error writing " + configFile + ": " + error);
                         self.commandRouter.pushToastMessage("error", self.commandRouter.getI18nString("PLUGIN_NAME"), self.commandRouter.getI18nString("ERR_WRITE") + configFile + ": " + error);
