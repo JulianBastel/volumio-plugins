@@ -210,7 +210,7 @@ lircRpiConfig.prototype.closeModals = function()
     self.logger.info("lircRpiConfig.prototype.closeModals ");
     
     self.commandRouter.closeModals();
-    this.emit('reboot', '')
+   
 };
 
 lircRpiConfig.prototype.reboot = function() 
@@ -218,7 +218,7 @@ lircRpiConfig.prototype.reboot = function()
     var self = this;
     
     self.logger.info("lircRpiConfig.prototype.reboot ");
-    this.emit('unknown', msg)
+    this.emit('reboot', '')
 };
 
 
