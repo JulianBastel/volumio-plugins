@@ -54,6 +54,7 @@ lircRpiConfig.prototype.onStop = function()
     var self = this;
     var defer=libQ.defer();
 
+    self.rmBootStr();
     // Once the Plugin has successfull stopped resolve the promise
     defer.resolve();
 
@@ -243,7 +244,44 @@ lircRpiConfig.prototype.writeBootStr = function(data)
     self.logger.info("lircRpiConfig.prototype.writeBootStr stop");
 };
 
+remotepi.prototype.rmBootStr = function() 
+{
+    var self = this;
+    var configFile = "/boot/config.txt";
+    var searchexp = new RegExp(os.EOL + os.EOL + "*" + lircOverlayBanner + "dtoverlay=.*" + os.EOL + "*");
 
+    fs.readFile
+    (
+        configFile,
+        "utf8",
+        function(error, configTxt)
+        {
+            if (error)
+            {
+                self.logger.error("Error reading" + configFile + ": " + error);
+                self.commandRouter.pushToastMessage("error", self.commandRouter.getI18nString("PLUGIN_NAME"), self.commandRouter.getI18nString("ERR_READ") + configFile + ": " + error);
+            }
+            else
+            {
+                configTxt = configTxt.replace(searchexp, os.EOL);
+                fs.writeFile
+                (
+                    configFile,
+                    configTxt,
+                    "utf8",
+                    function(error)
+                    {
+                        if(error)
+                        {
+                            self.logger.error("Error writing" + configFile + ": " + error);
+                            self.commandRouter.pushToastMessage("error", self.commandRouter.getI18nString("PLUGIN_NAME"), self.commandRouter.getI18nString("ERR_WRITE") + configFile + ": " + error);
+                        }
+                    }
+                );
+            }
+        }
+    );
+};
 
 
 
