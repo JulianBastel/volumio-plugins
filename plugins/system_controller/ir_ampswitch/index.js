@@ -130,6 +130,21 @@ AmpSwitchController.prototype.off = function()
     var self = this;
     self.logger.ASdebug('Togle GPIO: OFF');
     
+    exec
+    (
+        "/bin/irsend send_once siemens KEY_POWER", 
+        function (error, stdout, stderr) 
+        {
+            if(error)
+            {
+                self.logger.info('can not send command')
+            }
+        }
+    );
+    
+    
+ 
+    
     if(!self.config.get('inverted'))
     {
         self.logger.info("irAmpswitch.prototype.getUIConfig writeSync(0)");
