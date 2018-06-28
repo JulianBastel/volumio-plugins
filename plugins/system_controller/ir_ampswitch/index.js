@@ -131,7 +131,7 @@ irAmpswitch.prototype.parseStatus = function(state)
 };
 
 // switch outport port on
-AmpSwitchController.prototype.on = function() 
+irAmpswitch.prototype.on = function() 
 {
     var self = this;
     self.logger.ASdebug('irAmpswitch.prototype.on irsend send_once siemens KEY_POWER');
