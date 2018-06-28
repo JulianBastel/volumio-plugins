@@ -100,6 +100,9 @@ irAmpswitch.prototype.parseStatus = function(state)
 {
     var self = this;
     var delay = self.config.get('delay');
+    self.logger.ASdebug('irAmpswitch.prototype.parseStatus');
+    
+    /*
     self.logger.ASdebug('CurState: ' + state.status + ' PrevState: ' + status);
 
     clearTimeout(self.OffTimerID);
@@ -121,6 +124,7 @@ irAmpswitch.prototype.parseStatus = function(state)
                     delay
                 );
     }
+    */
 };
 
 
