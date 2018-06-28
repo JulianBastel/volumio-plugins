@@ -141,6 +141,10 @@ irAmpswitch.prototype.on = function()
     exec
     (
         "usr/bin/irsend send_once siemens KEY_POWER", 
+        {
+          uid: 1000,
+          gid: 1000
+        },
         function (error, stdout, stderr) 
         {
             if(error)
@@ -161,6 +165,10 @@ irAmpswitch.prototype.off = function()
     exec
     (
         "usr/bin/irsend send_once siemens KEY_POWER", 
+        {
+          uid: 1000,
+          gid: 1000
+        },
         function (error, stdout, stderr) 
         {
             if(error)
