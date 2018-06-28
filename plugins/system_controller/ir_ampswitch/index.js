@@ -140,7 +140,7 @@ irAmpswitch.prototype.on = function()
     
     exec
     (
-        "/bin/irsend send_once siemens KEY_POWER", 
+        "usr/bin/irsend send_once siemens KEY_POWER", 
         function (error, stdout, stderr) 
         {
             if(error)
@@ -160,7 +160,7 @@ irAmpswitch.prototype.off = function()
     
     exec
     (
-        "/bin/irsend send_once siemens KEY_POWER", 
+        "usr/bin/irsend send_once siemens KEY_POWER", 
         function (error, stdout, stderr) 
         {
             if(error)
