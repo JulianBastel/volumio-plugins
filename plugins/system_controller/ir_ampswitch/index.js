@@ -134,13 +134,13 @@ irAmpswitch.prototype.parseStatus = function(state)
 irAmpswitch.prototype.on = function() 
 {
     var self = this;
-    self.logger.ASdebug('irAmpswitch.prototype.on irsend send_start siemens KEY_POWER');
+    self.logger.ASdebug('irAmpswitch.prototype.on irsend send_once siemens KEY_POWER');
 
     self.logger.ASdebug('Togle GPIO: ON');
     
     exec
     (
-        "usr/bin/irsend send_start siemens KEY_POWER", 
+        "usr/bin/irsend send_once siemens KEY_POWER", 
         {
           uid: 1000,
           gid: 1000
@@ -160,11 +160,11 @@ irAmpswitch.prototype.on = function()
 irAmpswitch.prototype.off = function() 
 {
     var self = this;
-    self.logger.ASdebug('irAmpswitch.prototype.off irsend send_start siemens KEY_POWER');
+    self.logger.ASdebug('irAmpswitch.prototype.off irsend send_once siemens KEY_POWER');
     
     exec
     (
-        "usr/bin/irsend send_start siemens KEY_POWER", 
+        "usr/bin/irsend send_once siemens KEY_POWER", 
         {
           uid: 1000,
           gid: 1000
