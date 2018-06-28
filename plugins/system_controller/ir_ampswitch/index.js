@@ -138,23 +138,6 @@ irAmpswitch.prototype.on = function()
 
     self.logger.ASdebug('Togle GPIO: ON');
     
-    if(!self.config.get('inverted'))
-    {
-        
-    } 
-    else 
-    {
-        
-    }
-};
-
-
-//switch output port off
-irAmpswitch.prototype.off = function() 
-{
-    var self = this;
-    self.logger.ASdebug('irAmpswitch.prototype.off irsend send_once siemens KEY_POWER');
-    /*
     exec
     (
         "/bin/irsend send_once siemens KEY_POWER", 
@@ -166,18 +149,26 @@ irAmpswitch.prototype.off = function()
             }
         }
     );
-    */
+};
+
+
+//switch output port off
+irAmpswitch.prototype.off = function() 
+{
+    var self = this;
+    self.logger.ASdebug('irAmpswitch.prototype.off irsend send_once siemens KEY_POWER');
     
- 
-    
-    if(!self.config.get('inverted'))
-    {
-        self.logger.info("irAmpswitch.prototype.getUIConfig writeSync(0)");
-    } 
-    else 
-    {
-        self.logger.info("irAmpswitch.prototype.getUIConfig writeSync(1)");
-    }
+    exec
+    (
+        "/bin/irsend send_once siemens KEY_POWER", 
+        function (error, stdout, stderr) 
+        {
+            if(error)
+            {
+                self.logger.info('can not send command')
+            }
+        }
+    );
 };
 
 
