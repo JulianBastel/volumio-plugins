@@ -130,12 +130,30 @@ irAmpswitch.prototype.parseStatus = function(state)
     
 };
 
+// switch outport port on
+AmpSwitchController.prototype.on = function() 
+{
+    var self = this;
+    self.logger.ASdebug('irAmpswitch.prototype.on irsend send_once siemens KEY_POWER');
+
+    self.logger.ASdebug('Togle GPIO: ON');
+    
+    if(!self.config.get('inverted'))
+    {
+        
+    } 
+    else 
+    {
+        
+    }
+};
+
 
 //switch output port off
 irAmpswitch.prototype.off = function() 
 {
     var self = this;
-    self.logger.ASdebug('irsend send_once siemens KEY_POWER');
+    self.logger.ASdebug('irAmpswitch.prototype.off irsend send_once siemens KEY_POWER');
     /*
     exec
     (
