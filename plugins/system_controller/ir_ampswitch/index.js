@@ -8,6 +8,9 @@ var execSync = require('child_process').execSync;
 var io = require('socket.io-client');
 var socket = io.connect('http://localhost:3000');
 
+//declare global status variable
+var status = 'na';
+
 
 module.exports = irAmpswitch;
 function irAmpswitch(context)
