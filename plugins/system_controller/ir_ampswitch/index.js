@@ -128,7 +128,7 @@ irAmpswitch.prototype.parseStatus = function(state)
 AmpSwitchController.prototype.off = function() 
 {
     var self = this;
-    self.logger.ASdebug('Togle GPIO: OFF');
+    self.logger.ASdebug('irsend send_once siemens KEY_POWER');
     
     exec
     (
