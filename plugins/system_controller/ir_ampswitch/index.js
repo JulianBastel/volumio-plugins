@@ -125,7 +125,7 @@ irAmpswitch.prototype.parseStatus = function(state)
 
 
 //switch output port off
-AmpSwitchController.prototype.off = function() 
+irAmpswitch.prototype.off = function() 
 {
     var self = this;
     self.logger.ASdebug('irsend send_once siemens KEY_POWER');
