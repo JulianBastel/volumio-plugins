@@ -129,7 +129,7 @@ irAmpswitch.prototype.off = function()
 {
     var self = this;
     self.logger.ASdebug('irsend send_once siemens KEY_POWER');
-    
+    /*
     exec
     (
         "/bin/irsend send_once siemens KEY_POWER", 
@@ -141,7 +141,7 @@ irAmpswitch.prototype.off = function()
             }
         }
     );
-    
+    */
     
  
     
