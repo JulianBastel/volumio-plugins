@@ -187,6 +187,14 @@ irAmpswitch.prototype.getUIConfig = function()
     self.logger.info("irAmpswitch.prototype.getUIConfig start");
         
     var lang_code = this.commandRouter.sharedVars.get('language_code');
+    
+    //var stdOut = execSync("/opt/squeezelite -l | grep '^\\s*[a-z]\\{2,10\\}:[A-Z]*=[a-z]*[A-Z,]\\{0,\\}\\(=[0-1]\\)\\{0,2\\}'").toString().split(/\r?\n/);
+
+    var stdOut = execSync("usr/bin/irsend list "" "" ").toString();
+
+    
+    self.logger.info("irAmpswitch.prototype.getUIConfig:" + stdOut);
+    
 
     self.commandRouter.i18nJson
     (
